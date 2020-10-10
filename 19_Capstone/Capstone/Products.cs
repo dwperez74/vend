@@ -6,7 +6,7 @@ namespace Capstone
 {
     public class Product
     {
-        public string Product {get; set; }
+        public string ProductName {get; set; }
         public string SlotLocation { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
@@ -14,7 +14,7 @@ namespace Capstone
 
         public Product(string slotLocation, string product, decimal price, string category)
         {
-            Product = product;
+            ProductName = product;
             Category = category;
             SlotLocation = slotLocation; 
             Quantity = 5;
