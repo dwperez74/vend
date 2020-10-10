@@ -5,16 +5,18 @@ using System.Text;
 
 namespace Capstone
 {
-    class MainMenu : ConsoleMenu
+    public class MainMenu : ConsoleMenu
     {
         public MainMenu()
         {
-            AddOption("Display Items", /*function name*/);
-            AddOption("Select Item", /*function name*/);
-            AddOption("Purchase", /*function name*/);
-            AddOption("Exit", Exit);
+            AddOption("Display Items", DisplayName);
+            AddOption("Select Item", SelectItem);
+            AddOption("Purchase", Purchase);
+            AddOption("Exit", MenuExit);
             //add call change method
             //call vending machine method
+
+            
 
 
             Configure(cfg =>
@@ -28,5 +30,37 @@ namespace Capstone
 
         }
 
+        private static MenuOptionResult MenuExit()
+        {
+            return MenuOptionResult.CloseMenuAfterSelection;
+        }
+
+        private MenuOptionResult Purchase()
+        {
+            //What does a purchase mean?
+            //accept payment
+            //reduce quantity of selected item by 1
+            //make change
+            //tell vending machine to dispense item
+            return MenuOptionResult.WaitAfterMenuSelection;
+        }
+
+        private static MenuOptionResult SelectItem()
+        {
+            //user selects slot locations
+            //user selects quantity
+            //increase balance by cost of item/s
+            return MenuOptionResult.WaitAfterMenuSelection;
+        }
+
+        private static MenuOptionResult DisplayName()
+        {
+            //Show items available and price for each item
+            //foreach (KeyValuePair<string, Product> kvp in VendingMAchine.Inventory)
+            //{
+            //Console.WriteLine($"{kvp.Key} {kvp.Value.ProductName} {kvp.Value.ProductPrice}");
+            //}
+            return MenuOptionResult.WaitAfterMenuSelection;
+        }
     }
 }
