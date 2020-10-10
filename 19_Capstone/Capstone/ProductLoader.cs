@@ -9,13 +9,13 @@ namespace Capstone
     {
         //Properties
 
-        public List<Product> ProductList { get; set; }
+        public List<Products> ProductList { get; set; }
 
         //StreamReader to Import File
 
         public ProductLoader(string filePath)
         {
-            ProductList = new List<Product>();
+            ProductList = new List<Products>();
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -24,8 +24,8 @@ namespace Capstone
                     string eachLine = reader.ReadLine();
                     string[] parameter = eachLine.Split("|");
                     decimal price = decimal.Parse(parameter[2]);
-                    Product snacks = new Product(parameter[0], parameter[1], price, parameter[3]);
-                    ProductList.Add(snacks);
+                    Products products = new Products(parameter[0], parameter[1], price, parameter[3]);
+                    ProductList.Add(products);
                 }
             }
         }

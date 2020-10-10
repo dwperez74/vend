@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capstone
 {
-    public class Product
+    public class Products
     {
         public string Product {get; set; }
         public string SlotLocation { get; set; }
@@ -12,7 +12,7 @@ namespace Capstone
         public decimal Price { get; set; }
         public string Category { get; set; }
 
-        public Product(string slotLocation, string product, decimal price, string category)
+        public Products(string slotLocation, string product, decimal price, string category)
         {
             Product = product;
             Category = category;
@@ -20,6 +20,47 @@ namespace Capstone
             Quantity = 5;
             Price = price;
         }
+
+        public string Message
+        {
+            get
+            {
+                if (Category == "Gum")
+                {
+                    return "Chew, Chew, Yum!";
+                }
+                if (Category == "Drink")
+                {
+                    return "Glug, Glub, Yum!";
+                }
+                if (Category == "Chip")
+                {
+                    return "Crunch, Cruch, Yum!";
+                }
+                else if (Category == "Candy")
+                {
+                    return "Munch, Munch, Yum!";
+                }
+                return "";
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //method quantity sold
         //create new array to hold snack info

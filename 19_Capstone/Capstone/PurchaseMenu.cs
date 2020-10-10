@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MenuFramework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Capstone
 {
-    class PurchaseMenu
+    public class PurchaseMenu : ConsoleMenu
     {
+
+
     }
 }

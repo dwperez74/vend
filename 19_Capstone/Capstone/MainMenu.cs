@@ -12,12 +12,9 @@ namespace Capstone
             AddOption("Display Items", DisplayName);
             AddOption("Select Item", SelectItem);
             AddOption("Purchase", Purchase);
-            AddOption("Exit", MenuExit);
+            AddOption("Exit", Exit);
             //add call change method
             //call vending machine method
-
-            
-
 
             Configure(cfg =>
             {
@@ -30,10 +27,7 @@ namespace Capstone
 
         }
 
-        private static MenuOptionResult MenuExit()
-        {
-            return MenuOptionResult.CloseMenuAfterSelection;
-        }
+        
 
         private MenuOptionResult Purchase()
         {
@@ -58,7 +52,7 @@ namespace Capstone
             //Show items available and price for each item
             //foreach (KeyValuePair<string, Product> kvp in VendingMAchine.Inventory)
             //{
-            //Console.WriteLine($"{kvp.Key} {kvp.Value.ProductName} {kvp.Value.ProductPrice}");
+            //Console.WriteLine($"{kvp.Key} {kvp.Value.Product} {kvp.Value.Price}");
             //}
             return MenuOptionResult.WaitAfterMenuSelection;
         }
