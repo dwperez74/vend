@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using MenuFramework;
 
@@ -13,42 +14,48 @@ namespace Capstone
 
         public decimal Balance { get; private set; }
         public int Quantity { get; set; }
-        public VendingMachine(List<Products> productList)
+        public Dictionary<string, Products> ItemsDictionary { get; private set; }
+        public VendingMachine(Dictionary<string, Products> itemsDictionary)
         {
-            this.productList = productList;
+            ItemsDictionary = itemsDictionary;
         }
-        static void getData(string[] args)
-        {
-            //find excel file
-            Console.WriteLine(Environment.CurrentDirectory);
-            string filePath = @"..\..\vendingmachine.csv";
-            //declare dictionary
-            Dictionary<string, List<string>> itemDictionary = new Dictionary<string, List<string>>();
-            //read excel file
-            using (StreamReader stream = new StreamReader(filePath))
-            {
-                while (!stream.EndOfStream)
-                {
-                    string line = stream.ReadLine();
 
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(line);
-                    Console.ForegroundColor = ConsoleColor.White;
+        private ProductLoader productLoader;
+        //static void getData(string[] args)
+        //{
+        ////find excel file
+        ////Console.WriteLine(Environment.CurrentDirectory);
+        //string filePath = @"..\..\..\..\vendingmachine.csv";
 
-                    //csv data into array
-                    string[] array = line.Split('|');
+        //    //declare dictionary
+        //    //Dictionary<string, List<string>> itemDictionary = new Dictionary<string, List<string>>();
+        //    Dictionary<string, List<Products>> itemDictionary = new Dictionary<string, List<Products>>();
 
-                    //array to dictionary<string, list>
-                    string name = array[0];
-                    List<string> description = new List<string>();
-                    description.Add(array[1]);
-                    description.Add(array[2]);
-                    description.Add(array[3]);
-                    itemDictionary.Add(name, description);
-                }
+        //    //read excel file
+        //    using (StreamReader stream = new StreamReader(filePath))
+        //    {
+        //        while (!stream.EndOfStream)
+        //        {
+        //            string line = stream.ReadLine();
+
+        //            Console.ForegroundColor = ConsoleColor.Red;
+        //            Console.WriteLine(line);
+        //            Console.ForegroundColor = ConsoleColor.White;
+                    
+        //            //csv data into array
+        //            string[] array = line.Split('|');
+
+        //            //array to dictionary<string, list>
+        //            string slot = array[0];
+        //            //List<string> description = new List<string>();
+        //            //description.Add(array[1]);
+        //            //description.Add(array[2]);
+        //            //description.Add(array[3]);
+        //            itemDictionary.Add(slot, ProductList);
+        //        }
                 
-            }
-        }
+        //    }
+        //}
 
         //public void ReadFile()
         //{

@@ -1,20 +1,24 @@
 ﻿using MenuFramework;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Capstone
 {
     public class MainMenu : ConsoleMenu
     {
-        public MainMenu()
+        private VendingMachine vendingMachine;
+        public MainMenu(VendingMachine vendingMachine)
         {
+            this.vendingMachine = vendingMachine;
             AddOption("Display Items", DisplayName);
             AddOption("Select Item", SelectItem);
             AddOption("Purchase", Purchase);
             AddOption("Exit", Exit);
             //add call change method
             //call vending machine method
+            
 
             Configure(cfg =>
             {
@@ -39,7 +43,7 @@ namespace Capstone
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
-        private static MenuOptionResult SelectItem()
+        private MenuOptionResult SelectItem()
         {
             //user selects slot locations
             //user selects quantity
@@ -47,13 +51,13 @@ namespace Capstone
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
-        private static MenuOptionResult DisplayName()
+        private MenuOptionResult DisplayName()
         {
             //Show items available and price for each item
-            //foreach (KeyValuePair<string, Product> kvp in VendingMAchine.Inventory)
-            //{
-            //Console.WriteLine($"{kvp.Key} {kvp.Value.Product} {kvp.Value.Price}");
-            //}
+            foreach (KeyValuePair<string, Products> kvp in vendingMachine.ItemsDictionary)
+            {
+                Console.WriteLine($"{kvp.Key} {kvp.Value.ProductName} {kvp.Value.Price:c}");
+            }
             return MenuOptionResult.WaitAfterMenuSelection;
         }
     }

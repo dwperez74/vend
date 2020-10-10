@@ -1,6 +1,7 @@
 ﻿using MenuFramework;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Capstone
 {
@@ -8,10 +9,9 @@ namespace Capstone
     {
         static void Main(string[] args)
         {
-            string filePath = @"C:\Users\Student\GIT\c-module-1-capstone-team-2\19_Capstone\vendingmachine.csv";
-            ProductLoader productLoader = new ProductLoader(filePath);
-            VendingMachine vendingMachine = new VendingMachine(productLoader.ProductList);
-            MainMenu mainMenu = new MainMenu();
+            Dictionary<string, Products> itemsDictionary = ProductLoader.getData(@"..\..\..\..\vendingmachine.csv");
+            VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
+            MainMenu mainMenu = new MainMenu(vendingMachine);
             mainMenu.Show();
 
         }

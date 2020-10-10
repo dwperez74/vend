@@ -1,34 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Capstone
 {
-    class ProductLoader
+    public class ProductLoader
     {
-        //Properties
 
-        public List<Products> ProductList { get; set; }
-
-        //StreamReader to Import File
-
-        public ProductLoader(string filePath)
+        public static Dictionary<string, Products> getData(string FilePath)
         {
-            ProductList = new List<Products>();
+            Dictionary<string, Products> itemDictionary = new Dictionary<string, Products>();
 
-            using (StreamReader reader = new StreamReader(filePath))
+            //read excel file
+            using (StreamReader stream = new StreamReader(FilePath))
             {
-                while (!reader.EndOfStream)
+                while (!stream.EndOfStream)
                 {
-                    string eachLine = reader.ReadLine();
-                    string[] parameter = eachLine.Split("|");
-                    decimal price = decimal.Parse(parameter[2]);
-                    Products products = new Products(parameter[0], parameter[1], price, parameter[3]);
-                    ProductList.Add(products);
-                }
-            }
-        }
+                    string line = stream.ReadLine();
 
+                    //csv data into array
+                    string[] array = line.Split('|');
+                    decimal price = decimal.Parse(array[2]);
+
+                    Products product = new Products(array[0], array[1], price, array[3]);
+                    itemDictionary.Add(array[0], product);
+                }
+                return itemDictionary;
+            }
+
+        }
     }
+
 }
+
