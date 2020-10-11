@@ -13,7 +13,7 @@ namespace Capstone
         {
             this.vendingMachine = vendingMachine;
             AddOption("Display Items", DisplayName);
-            AddOption("Select Item", SelectItem);
+            //AddOption("Select Item", SelectItem);
             AddOption("Purchase", Purchase);
             AddOption("Exit", Exit);
             //add call change method
@@ -35,16 +35,20 @@ namespace Capstone
 
         private MenuOptionResult Purchase()
         {
+            PurchaseMenu purchaseMenu = new PurchaseMenu();
+            purchaseMenu.Show();
+            return MenuOptionResult.DoNotWaitAfterMenuSelection;
             //What does a purchase mean?
             //accept payment
             //reduce quantity of selected item by 1
             //make change
             //tell vending machine to dispense item
-            return MenuOptionResult.WaitAfterMenuSelection;
+            //return MenuOptionResult.WaitAfterMenuSelection;
         }
 
         private MenuOptionResult SelectItem()
         {
+
             //user selects slot locations
             //user selects quantity
             //increase balance by cost of item/s
