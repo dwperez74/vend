@@ -18,10 +18,6 @@ namespace Capstone
         public decimal TotalAmountDue
         {
             get; set;
-            //get
-            //{
-            //    return Quantity * Products.Price;           //Why cant I reference the products class?
-            //}
         }
         public VendingMachine(Dictionary<string, Products> itemsDictionary)
         {

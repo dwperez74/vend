@@ -8,6 +8,7 @@ namespace Capstone
     public class PurchaseMenu : ConsoleMenu
     {
         private VendingMachine vendingMachine;
+        private Dictionary<string, Products> itemsDictionary;
 
         public decimal Balance { get; private set; } = 0.00M;
         
@@ -30,7 +31,7 @@ namespace Capstone
 
         protected override void OnBeforeShow()
         {
-            Console.WriteLine("Purchase Menu");
+            Console.WriteLine("\tPurchase Menu");
             Console.WriteLine($"Current Money Provided: {Balance:c}");
         }
         private MenuOptionResult FinishTransaction()
@@ -40,7 +41,13 @@ namespace Capstone
 
         private MenuOptionResult SelectProduct()
         {
-            throw new NotImplementedException();
+            VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
+            //Show list of items for user to choose from
+            foreach (KeyValuePair<string, Products> kvp in vendingMachine.ItemsDictionary)
+            {
+                Console.WriteLine($"{kvp.Key}\t {kvp.Value.ProductName}\t {kvp.Value.Price:c}\t Quantity Remaining: {kvp.Value.Quantity}");
+            }
+            return MenuOptionResult.WaitAfterMenuSelection;
         }
 
         private MenuOptionResult FeedMoney()

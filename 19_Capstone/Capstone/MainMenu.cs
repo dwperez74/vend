@@ -50,10 +50,12 @@ namespace Capstone
 
         private MenuOptionResult SelectItem()
         {
+            //user selects slot locations/Display Options
+            //foreach (KeyValuePair<string, Products> kvp in vendingMachine.ItemsDictionary)
+            //{
+            //    Console.WriteLine($"{kvp.Key}\t {kvp.Value.ProductName}\t {kvp.Value.Price:c}\t Quantity Remaining: {kvp.Value.Quantity,10}");
+            //}
 
-            //user selects slot locations
-            //user selects quantity
-            //increase balance by cost of item/s
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
