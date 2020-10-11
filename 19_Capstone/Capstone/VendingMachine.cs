@@ -12,7 +12,7 @@ namespace Capstone
         //private Dictionary<string, Products> vendingDictionary = new Dictionary<string, Products>();
         private List<Products> productList;
 
-        public decimal Balance { get; private set; } = 0;
+        public decimal Balance { get; set; } = 0;
         public int Quantity { get; set; }
         public Dictionary<string, Products> ItemsDictionary { get; private set; }
         public VendingMachine(Dictionary<string, Products> itemsDictionary)

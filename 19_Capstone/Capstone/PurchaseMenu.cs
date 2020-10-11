@@ -7,7 +7,12 @@ namespace Capstone
 {
     public class PurchaseMenu : ConsoleMenu
     {
+        public VendingMachine VendingMachine;
         public PurchaseMenu()
+        {
+
+        }
+        public PurchaseMenu(VendingMachine vendingMachine)
         {
             AddOption("Feed Money", FeedMoney);
             AddOption("Select Product", SelectProduct);
@@ -35,8 +40,8 @@ namespace Capstone
         {
             Console.WriteLine("Enter Dollar Amount");
             int deposit = int.Parse(Console.ReadLine());
-            balance += deposit;
-            Console.WriteLine($"your new balance is {balance}");
+            this.VendingMachine.Balance += deposit;
+            Console.WriteLine($"your new balance is");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
     }
