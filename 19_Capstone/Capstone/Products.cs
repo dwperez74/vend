@@ -18,7 +18,7 @@ namespace Capstone
             Category = category;
             SlotLocation = slotLocation; 
             Quantity = 5;
-            Price = price;
+            this.Price = price;
         }
 
         public string Message

@@ -9,69 +9,74 @@ namespace Capstone
 {
     public class VendingMachine
     {
-        //private Dictionary<string, Products> vendingDictionary = new Dictionary<string, Products>();
-        private List<Products> productList;
+        
+        //private List<Products> productList;
 
         public decimal Balance { get; set; } = 0;
         public int Quantity { get; set; }
         public Dictionary<string, Products> ItemsDictionary { get; private set; }
+        public decimal TotalAmountDue
+        {
+            get; set;
+            //get
+            //{
+            //    return Quantity * Products.Price;           //Why cant I reference the products class?
+            //}
+        }
         public VendingMachine(Dictionary<string, Products> itemsDictionary)
         {
             ItemsDictionary = itemsDictionary;
         }
 
-        private ProductLoader productLoader;
-        //static void getData(string[] args)
+
+        //public decimal ReturnChange()
         //{
-        ////find excel file
-        ////Console.WriteLine(Environment.CurrentDirectory);
-        //string filePath = @"..\..\..\..\vendingmachine.csv";
-
-        //    //declare dictionary
-        //    //Dictionary<string, List<string>> itemDictionary = new Dictionary<string, List<string>>();
-        //    Dictionary<string, List<Products>> itemDictionary = new Dictionary<string, List<Products>>();
-
-        //    //read excel file
-        //    using (StreamReader stream = new StreamReader(filePath))
+        //    if (Balance == TotalAmount)
         //    {
-        //        while (!stream.EndOfStream)
-        //        {
-        //            string line = stream.ReadLine();
-
-        //            Console.ForegroundColor = ConsoleColor.Red;
-        //            Console.WriteLine(line);
-        //            Console.ForegroundColor = ConsoleColor.White;
-                    
-        //            //csv data into array
-        //            string[] array = line.Split('|');
-
-        //            //array to dictionary<string, list>
-        //            string slot = array[0];
-        //            //List<string> description = new List<string>();
-        //            //description.Add(array[1]);
-        //            //description.Add(array[2]);
-        //            //description.Add(array[3]);
-        //            itemDictionary.Add(slot, ProductList);
-        //        }
-                
+        //        return Console.WriteLine("Have a good day!");           //WHAT IS THE ISSUE HERE?
         //    }
+        //    else (Balance > TotalAmount)
+        //    {
+        //        return Console.WriteLine($"Your change is: {Balance - TotalAmount}");
+        //    }
+
         //}
 
-        //public void ReadFile()
-        //{
-        //    string directory = Environment.CurrentDirectory;
-        //    string fileName = @"C:\Users\David Perez\Desktop\MyTE\c-module-1-capstone-team-2\19_Capstone\vendingmachine.csv";
+        public Products DispenseProduct(string slotLocation)
+        {
+            if (!ItemsDictionary.ContainsKey(slotLocation))
+            {
+                throw new Exception("This item does not exist");
+            }
 
-        //    string fullPath = Path.Combine(directory, fileName);
+            Products selectedProduct = ItemsDictionary[slotLocation];
 
+            if (selectedProduct.Quantity == 0)
+            {
+                throw new Exception("Item is out of stock");
+            }
+            else
+            {
+                if (Balance < selectedProduct.Price)        //WHY DOES PRICE WORK HERE BUT NOT ABOVE FOR TOTAL AMOUNT?!
+                {
+                    throw new Exception("Balance insufficient for selected item");
+                }
+                else
+                {
+                    Balance -= selectedProduct.Price;           //WORKED AGAIN HERE?!
+                    //TotalAmountDue += selectedProduct.Price;
+                    selectedProduct.Quantity--;
+                    Console.WriteLine(selectedProduct.Message);
+                }
+            }
+            return selectedProduct;         //TODO: This needs more, what do we want to happen/be said when the product dispenses
+        
+        }
 
-        //    //vendingDictionary.add(string[], products)
-        //}
-
+        
 
         //method to feed money
         //method for making change
-        //method for purchasing snack   --**NEED TO GO SOMEWHERE ELSE
-        //method for adding funds--**NEED TO GO SOMEWHERE ELSE
+        
     }
 }

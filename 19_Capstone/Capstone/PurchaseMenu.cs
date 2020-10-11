@@ -7,24 +7,31 @@ namespace Capstone
 {
     public class PurchaseMenu : ConsoleMenu
     {
-        public VendingMachine VendingMachine;
-        public PurchaseMenu()
-        {
+        private VendingMachine vendingMachine;
 
-        }
+        public decimal Balance { get; private set; } = 0.00M;
+        
         public PurchaseMenu(VendingMachine vendingMachine)
         {
+            vendingMachine = vendingMachine;
             AddOption("Feed Money", FeedMoney);
             AddOption("Select Product", SelectProduct);
             AddOption("Finish Transaction", FinishTransaction);
-            AddOption("Back to Main", Exit);
+            Console.WriteLine($"Current Money Provided: {Balance:c}");
+            //AddOption("Back to Main", Exit);
 
             Configure(cfg =>
             {
                 cfg.ItemForegroundColor = ConsoleColor.Blue;
                 cfg.SelectedItemForegroundColor = ConsoleColor.Yellow;
-                cfg.Title = "Purchase Menu";
+                cfg.Title = "Purchase Menu";                            //TODO: Why doesn't this show up?
             });
+        }
+
+        protected override void OnBeforeShow()
+        {
+            Console.WriteLine("Purchase Menu");
+            Console.WriteLine($"Current Money Provided: {Balance:c}");
         }
         private MenuOptionResult FinishTransaction()
         {
@@ -38,10 +45,10 @@ namespace Capstone
 
         private MenuOptionResult FeedMoney()
         {
-            Console.WriteLine("Enter Dollar Amount");
-            int deposit = int.Parse(Console.ReadLine());
-            this.VendingMachine.Balance += deposit;
-            Console.WriteLine($"your new balance is");
+            Console.WriteLine("Enter Dollar Amount: ");
+            decimal deposit = decimal.Parse(Console.ReadLine());
+            Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            Console.WriteLine($"Your new balance is: {Balance:c} ");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
     }

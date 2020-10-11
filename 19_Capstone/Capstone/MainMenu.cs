@@ -12,10 +12,10 @@ namespace Capstone
         public MainMenu(VendingMachine vendingMachine)
         {
             this.vendingMachine = vendingMachine;
-            AddOption("Display Items", DisplayName);
+            AddOption("(1) Display Vending Machine Items", DisplayName);
             //AddOption("Select Item", SelectItem);
-            AddOption("Purchase", Purchase);
-            AddOption("Exit", Exit);
+            AddOption("(2) Purchase", PurchaseMenu);
+            AddOption("(3) Exit", Exit);                
             //add call change method
             //call vending machine method
             
@@ -32,12 +32,14 @@ namespace Capstone
         }
 
         
+        
 
-        private MenuOptionResult Purchase()
+        private MenuOptionResult PurchaseMenu()
         {
-            PurchaseMenu purchaseMenu = new PurchaseMenu();
+            //PurchaseMenu purchaseMenu = new PurchaseMenu();
+            PurchaseMenu purchaseMenu = new PurchaseMenu(vendingMachine);
             purchaseMenu.Show();
-            return MenuOptionResult.DoNotWaitAfterMenuSelection;
+            return MenuOptionResult.WaitAfterMenuSelection;
             //What does a purchase mean?
             //accept payment
             //reduce quantity of selected item by 1
@@ -60,7 +62,7 @@ namespace Capstone
             //Show items available and price for each item
             foreach (KeyValuePair<string, Products> kvp in vendingMachine.ItemsDictionary)
             {
-                Console.WriteLine($"{kvp.Key} {kvp.Value.ProductName} {kvp.Value.Price:c}");
+                Console.WriteLine($"{kvp.Key}\t {kvp.Value.ProductName}\t {kvp.Value.Price:c}\t Quantity Remaining: {kvp.Value.Quantity, 10}");
             }
             return MenuOptionResult.WaitAfterMenuSelection;
         }
