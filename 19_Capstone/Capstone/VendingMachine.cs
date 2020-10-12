@@ -58,10 +58,14 @@ namespace Capstone
         
         }
 
-        
+        public void WriteLog(string userChoice, decimal startingBalance)
+        {
+            string fullPath = @"..\..\..\..\Log.txt";
 
-       
-        //method for making change
-        
+            using (StreamWriter sw = new StreamWriter(fullPath, true))
+            {
+                sw.WriteLine($"{DateTime.UtcNow} {userChoice} {startingBalance:c} {Balance:c}");
+            }
+        }  
     }
 }

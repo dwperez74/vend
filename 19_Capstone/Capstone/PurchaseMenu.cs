@@ -13,7 +13,7 @@ namespace Capstone
         //private Dictionary<string, Products> itemsDictionary;
         //VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
 
-        public decimal Balance { get; private set; }
+        //public decimal Balance { get; private set; }
         
         public PurchaseMenu(VendingMachine vendingMachine)
         {
@@ -39,20 +39,22 @@ namespace Capstone
         }
         private MenuOptionResult FinishTransaction()    //TODO: Balance keeps getting reset and thus is giving improper change. Also, we need to add an exit option once the change has been "given"
         {
-            int quarters = (int)(Balance / .25M);
-            Balance -= (quarters * .25M);
-            int dimes = (int)(Balance / .10M);
-            Balance -= (dimes * .10M);
-            int nickels = (int)(Balance / .05M);
-            Balance -= (nickels * .05M);
-            Console.WriteLine($"Your change is {quarters} quarters, {dimes} dimes, {nickels} nickels, and the balance is now: {Balance:c}.");
-            AddOption("Back to Main", Exit);
-            return MenuOptionResult.WaitAfterMenuSelection;
+            decimal startingBalance = this.vendingMachine.Balance;
+            int quarters = (int)(vendingMachine.Balance / .25M);
+            vendingMachine.Balance -= (quarters * .25M);
+            int dimes = (int)(vendingMachine.Balance / .10M);
+            vendingMachine.Balance -= (dimes * .10M);
+            int nickels = (int)(vendingMachine.Balance / .05M);
+            vendingMachine.Balance -= (nickels * .05M);
+            vendingMachine.WriteLog("GIVE CHANGE:", startingBalance);
+            Console.WriteLine($"Your change is {quarters} quarters, {dimes} dimes, {nickels} nickels, and the balance is now: {vendingMachine.Balance:c}.");
+            return MenuOptionResult.CloseMenuAfterSelection;
             
         }
 
         private MenuOptionResult SelectProduct()
         {
+            decimal startingBalance = this.vendingMachine.Balance;
             this.vendingMachine = vendingMachine;
             //VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
             //Show list of items for user to choose from
@@ -69,7 +71,7 @@ namespace Capstone
             {
                 Products selectedProduct = vendingMachine.DispenseProduct(userSelection);
                 Console.WriteLine($"You have purchased {selectedProduct.ProductName} for {selectedProduct.Price:c} and have a remaining balance of {this.vendingMachine.Balance:c}.");
-                //Console.WriteLine(selectedProduct.);
+                vendingMachine.WriteLog($"{selectedProduct.ProductName} {selectedProduct.SlotLocation}", startingBalance);
             }
             catch (Exception ex)
             {
@@ -80,10 +82,11 @@ namespace Capstone
 
         private MenuOptionResult FeedMoney()
         {
+            decimal startingBalance = this.vendingMachine.Balance;
             Console.WriteLine("Enter Dollar Amount: ");
             decimal deposit = decimal.Parse(Console.ReadLine());
-            this.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
-            vendingMachine.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            this.vendingMachine.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            vendingMachine.WriteLog("FEED MONEY: ", startingBalance);
             Console.WriteLine($"Your new balance is: {this.vendingMachine.Balance:c} ");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
