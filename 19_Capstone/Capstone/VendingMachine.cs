@@ -12,7 +12,7 @@ namespace Capstone
         
         //private List<Products> productList;
 
-        public decimal Balance { get; private set; } 
+        public decimal Balance { get; set; } 
         public int Quantity { get; set; }
         public Dictionary<string, Products> ItemsDictionary { get; private set; }
         public decimal TotalAmountDue
