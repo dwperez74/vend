@@ -12,7 +12,7 @@ namespace Capstone
         //private Dictionary<string, Products> itemsDictionary;
         //VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
 
-        public decimal Balance { get; private set; } = 0.00M;
+        public decimal Balance { get; private set; }
         
         public PurchaseMenu(VendingMachine vendingMachine)
         {
@@ -72,7 +72,7 @@ namespace Capstone
         {
             Console.WriteLine("Enter Dollar Amount: ");
             decimal deposit = decimal.Parse(Console.ReadLine());
-            Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            this.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
             Console.WriteLine($"Your new balance is: {Balance:c} ");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
