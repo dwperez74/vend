@@ -24,21 +24,8 @@ namespace Capstone
             ItemsDictionary = itemsDictionary;
         }
 
-
-        //public decimal ReturnChange()
-        //{
-        //    if (Balance == TotalAmount)
-        //    {
-        //        return Console.WriteLine("Have a good day!");           //WHAT IS THE ISSUE HERE?
-        //    }
-        //    else (Balance > TotalAmount)
-        //    {
-        //        return Console.WriteLine($"Your change is: {Balance - TotalAmount}");
-        //    }
-
-        //}
-
         public Products DispenseProduct(string slotLocation)
+        
         {
             if (!ItemsDictionary.ContainsKey(slotLocation))
             {
@@ -53,13 +40,13 @@ namespace Capstone
             }
             else
             {
-                if (Balance < selectedProduct.Price)        //WHY DOES PRICE WORK HERE BUT NOT ABOVE FOR TOTAL AMOUNT?!
+                if (Balance < selectedProduct.Price)        
                 {
                     throw new Exception("Balance insufficient for selected item");
                 }
                 else
                 {
-                    Balance -= selectedProduct.Price;           //WORKED AGAIN HERE?!
+                    Balance -= selectedProduct.Price;           
                     //TotalAmountDue += selectedProduct.Price;
                     selectedProduct.Quantity--;
                     Console.WriteLine(selectedProduct.Message);

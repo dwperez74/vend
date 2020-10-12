@@ -34,17 +34,6 @@ namespace Capstone
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
-        private MenuOptionResult SelectItem()
-        {
-            //user selects slot locations/Display Options
-            //foreach (KeyValuePair<string, Products> kvp in vendingMachine.ItemsDictionary)
-            //{
-            //    Console.WriteLine($"{kvp.Key}\t {kvp.Value.ProductName}\t {kvp.Value.Price:c}\t Quantity Remaining: {kvp.Value.Quantity,10}");
-            //}
-
-            return MenuOptionResult.WaitAfterMenuSelection;
-        }
-
         private MenuOptionResult DisplayName()
         {
             //Show items available and price for each item

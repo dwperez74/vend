@@ -1,6 +1,7 @@
 ﻿using MenuFramework;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Capstone
@@ -21,7 +22,7 @@ namespace Capstone
             AddOption("Select Product", SelectProduct);
             AddOption("Finish Transaction", FinishTransaction);
             Console.WriteLine($"Current Money Provided: {this.vendingMachine.Balance:c}");
-            //AddOption("Back to Main", Exit);
+            AddOption("Back to Main", Exit);
 
             Configure(cfg =>
             {
@@ -36,9 +37,18 @@ namespace Capstone
             Console.WriteLine("\tPurchase Menu");
             Console.WriteLine($"Current Money Provided: {this.vendingMachine.Balance:c}");
         }
-        private MenuOptionResult FinishTransaction()
+        private MenuOptionResult FinishTransaction()    //TODO: Balance keeps getting reset and thus is giving improper change. Also, we need to add an exit option once the change has been "given"
         {
-            throw new NotImplementedException();
+            int quarters = (int)(Balance / .25M);
+            Balance -= (quarters * .25M);
+            int dimes = (int)(Balance / .10M);
+            Balance -= (dimes * .10M);
+            int nickels = (int)(Balance / .05M);
+            Balance -= (nickels * .05M);
+            Console.WriteLine($"Your change is {quarters} quarters, {dimes} dimes, {nickels} nickels, and the balance is now: {Balance:c}.");
+            AddOption("Back to Main", Exit);
+            return MenuOptionResult.WaitAfterMenuSelection;
+            
         }
 
         private MenuOptionResult SelectProduct()
