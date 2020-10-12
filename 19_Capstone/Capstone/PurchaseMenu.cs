@@ -11,8 +11,6 @@ namespace Capstone
 
         //private Dictionary<string, Products> itemsDictionary;
         //VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
-
-        public decimal Balance { get; private set; } = 0.00M;
         
         public PurchaseMenu(VendingMachine vendingMachine)
         {
@@ -20,7 +18,7 @@ namespace Capstone
             AddOption("Feed Money", FeedMoney);
             AddOption("Select Product", SelectProduct);
             AddOption("Finish Transaction", FinishTransaction);
-            Console.WriteLine($"Current Money Provided: {Balance:c}");
+            Console.WriteLine($"Current Money Provided: {this.vendingMachine.Balance:c}");
             //AddOption("Back to Main", Exit);
 
             Configure(cfg =>
@@ -34,7 +32,7 @@ namespace Capstone
         protected override void OnBeforeShow()
         {
             Console.WriteLine("\tPurchase Menu");
-            Console.WriteLine($"Current Money Provided: {Balance:c}");
+            Console.WriteLine($"Current Money Provided: {this.vendingMachine.Balance:c}");
         }
         private MenuOptionResult FinishTransaction()
         {
@@ -58,7 +56,7 @@ namespace Capstone
             try
             {
                 Products selectedProduct = vendingMachine.DispenseProduct(userSelection);
-                Console.WriteLine($"You have purchased {selectedProduct.ProductName} for {selectedProduct.Price:c} and have a remaining balance of {Balance:c}.");
+                Console.WriteLine($"You have purchased {selectedProduct.ProductName} for {selectedProduct.Price:c} and have a remaining balance of {this.vendingMachine.Balance:c}.");
                 //Console.WriteLine(selectedProduct.);
             }
             catch (Exception ex)
@@ -72,8 +70,8 @@ namespace Capstone
         {
             Console.WriteLine("Enter Dollar Amount: ");
             decimal deposit = decimal.Parse(Console.ReadLine());
-            Balance += deposit;     //this.VendingMachine.      //This might need to be added back
-            Console.WriteLine($"Your new balance is: {Balance:c} ");
+            this.vendingMachine.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            Console.WriteLine($"Your new balance is: {this.vendingMachine.Balance:c} ");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
     }
