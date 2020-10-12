@@ -63,6 +63,8 @@ namespace Capstone
                     //TotalAmountDue += selectedProduct.Price;
                     selectedProduct.Quantity--;
                     Console.WriteLine(selectedProduct.Message);
+
+                    //TODO: Create Audit StreamWriter for Log.txt
                 }
             }
             return selectedProduct;         //TODO: This needs more, what do we want to happen/be said when the product dispenses
