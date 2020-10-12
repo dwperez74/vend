@@ -21,7 +21,7 @@ namespace Capstone
             AddOption("Feed Money", FeedMoney);
             AddOption("Select Product", SelectProduct);
             AddOption("Finish Transaction", FinishTransaction);
-            Console.WriteLine($"Current Money Provided: {this.vendingMachine.Balance:c}");
+            Console.WriteLine($"Current Money Provided: {Balance:c}");
             AddOption("Back to Main", Exit);
 
             Configure(cfg =>
