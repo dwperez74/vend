@@ -31,9 +31,6 @@ namespace Capstone
 
         }
 
-        
-        
-
         private MenuOptionResult PurchaseMenu()
         {
             //PurchaseMenu purchaseMenu = new PurchaseMenu();
