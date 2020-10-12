@@ -13,7 +13,6 @@ namespace Capstone
         {
             this.vendingMachine = vendingMachine;
             AddOption("(1) Display Vending Machine Items", DisplayName);
-            //AddOption("Select Item", SelectItem);
             AddOption("(2) Purchase", PurchaseMenu);
             AddOption("(3) Exit", Exit);                
             //add call change method
@@ -26,23 +25,13 @@ namespace Capstone
                 cfg.SelectedItemForegroundColor = ConsoleColor.Yellow;
                 cfg.Title = "Main Menu";
             });
-
-
-
         }
 
         private MenuOptionResult PurchaseMenu()
         {
-            //PurchaseMenu purchaseMenu = new PurchaseMenu();
             PurchaseMenu purchaseMenu = new PurchaseMenu(vendingMachine);
             purchaseMenu.Show();
             return MenuOptionResult.WaitAfterMenuSelection;
-            //What does a purchase mean?
-            //accept payment
-            //reduce quantity of selected item by 1
-            //make change
-            //tell vending machine to dispense item
-            //return MenuOptionResult.WaitAfterMenuSelection;
         }
 
         private MenuOptionResult SelectItem()
