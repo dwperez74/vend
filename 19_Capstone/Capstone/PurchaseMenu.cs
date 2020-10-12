@@ -13,7 +13,7 @@ namespace Capstone
         //private Dictionary<string, Products> itemsDictionary;
         //VendingMachine vendingMachine = new VendingMachine(itemsDictionary);
 
-        public decimal Balance { get; private set; }
+        //public decimal Balance { get; private set; }
         
         public PurchaseMenu(VendingMachine vendingMachine)
         {
@@ -39,15 +39,14 @@ namespace Capstone
         }
         private MenuOptionResult FinishTransaction()    //TODO: Balance keeps getting reset and thus is giving improper change. Also, we need to add an exit option once the change has been "given"
         {
-            int quarters = (int)(Balance / .25M);
-            Balance -= (quarters * .25M);
-            int dimes = (int)(Balance / .10M);
-            Balance -= (dimes * .10M);
-            int nickels = (int)(Balance / .05M);
-            Balance -= (nickels * .05M);
-            Console.WriteLine($"Your change is {quarters} quarters, {dimes} dimes, {nickels} nickels, and the balance is now: {Balance:c}.");
-            AddOption("Back to Main", Exit);
-            return MenuOptionResult.WaitAfterMenuSelection;
+            int quarters = (int)(vendingMachine.Balance / .25M);
+            vendingMachine.Balance -= (quarters * .25M);
+            int dimes = (int)(vendingMachine.Balance / .10M);
+            vendingMachine.Balance -= (dimes * .10M);
+            int nickels = (int)(vendingMachine.Balance / .05M);
+            vendingMachine.Balance -= (nickels * .05M);
+            Console.WriteLine($"Your change is {quarters} quarters, {dimes} dimes, {nickels} nickels, and the balance is now: {vendingMachine.Balance:c}.");
+            return MenuOptionResult.CloseMenuAfterSelection;
             
         }
 
@@ -82,8 +81,7 @@ namespace Capstone
         {
             Console.WriteLine("Enter Dollar Amount: ");
             decimal deposit = decimal.Parse(Console.ReadLine());
-            this.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
-            vendingMachine.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
+            this.vendingMachine.Balance += deposit;     //this.VendingMachine.      //This might need to be added back
             Console.WriteLine($"Your new balance is: {this.vendingMachine.Balance:c} ");
             return MenuOptionResult.WaitAfterMenuSelection;
         }
